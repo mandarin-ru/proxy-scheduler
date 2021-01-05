@@ -30,9 +30,9 @@ if (($handle = fopen($file_name, "a+")) !== FALSE) {
 }?>
     <form action="">
         <input type="hidden" name="ip" value="<?=$_SERVER['REMOTE_ADDR']?>">
-        <input type="text" name="proxy">
-        <input type="number" name="port">
-        <input type="number" name="time">
+        <input type="text" name="proxy" placeholder="Proxy">
+        <input type="number" name="port" placeholder="Port">
+        <input type="number" name="time" placeholder="Время (сек.)">
         <input type="submit">
     </form>
     <table border="1">
