@@ -1,0 +1,22 @@
+<html>
+<body>
+    <form action="">
+        <input type="text" name="proxy" placeholder="Proxy host">
+        <input type="number" name="port" placeholder="Port">
+        <input type="number" name="time" placeholder="Duration (seconds)">
+        <input type="submit">
+    </form>
+    <table border="1">
+        {{# DATA }}
+            <tr>
+                <td>{{ ip }}</td>
+                <td>{{ proxy }}</td>
+                <td>{{ port }}</td>
+                <td>{{ duration }}</td>
+            </tr>
+        {{/ DATA }}
+    </table>
+
+    <a href="/pac.php">PAC-file link</a>
+</body>
+</html>
