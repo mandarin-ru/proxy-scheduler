@@ -6,7 +6,7 @@ $file_name = "configurate.csv";
 
 if (($handle = fopen($file_name, "a+")) !== FALSE) {
     while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
-        $arResult['DATA'][] = ['ip' => $data[0], 'proxy' => $data[1], 'port' => $data[2], 'duration' => $data[3]]; 
+        $arResult['DATA'][] = ['ip' => $data[0], 'proxy' => $data[1], 'port' => $data[2], 'duration' => $data[3], 'pattern' => $data[4]]; 
     }
 
     if (!empty($_REQUEST['proxy'])) {
@@ -22,7 +22,7 @@ if (($handle = fopen($file_name, "a+")) !== FALSE) {
             fputcsv($handle1, explode(",", $arResult['DATA']));
         }*/
         
-        $write = [$_SERVER['REMOTE_ADDR'], $_REQUEST['proxy'], $_REQUEST['port'], time() + $_REQUEST['time']];
+        $write = [$_SERVER['REMOTE_ADDR'], $_REQUEST['proxy'], $_REQUEST['port'], time() + $_REQUEST['time'], $_REQUEST['pattern']];
         fputcsv($handle, $write);
         header("Location: index.php");
         exit();

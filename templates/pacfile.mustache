@@ -1,8 +1,12 @@
 function FindProxyForURL(url, host) {
 {{#proxy}}
+  {{#pattern}}
+  if (shExpMatch(url, "{{ pattern }}")) {
+  {{/pattern}}
     return "PROXY {{proxy}}:{{port}}";
+  {{#pattern}}
+  }
+  {{/pattern}}
 {{/proxy}}
-{{^proxy}}
     return "DIRECT";
-{{/proxy}}
 }

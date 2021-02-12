@@ -7,8 +7,8 @@ $file_name = "configurate.csv";
 
 if (($handle = fopen($file_name, "a+")) !== false) {
     while (($data = fgetcsv($handle, 0, ",")) !== false) {
-        if ($data[0] == $_SERVER['REMOTE_ADDR'] && date() < $data[3]) {
-            $arParams = ['ip' => $data[0], 'proxy' => $data[1], 'port' => $data[2], 'duration' => $data[3]]; ;
+        if ($data[0] == $_SERVER['REMOTE_ADDR'] && time() < $data[3]) {
+            $arParams = ['ip' => $data[0], 'proxy' => $data[1], 'port' => $data[2], 'duration' => $data[3], 'pattern' => $data[4]]; ;
         }
     }
 	fclose($handle);
