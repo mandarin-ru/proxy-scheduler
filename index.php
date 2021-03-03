@@ -1,12 +1,15 @@
 <?php
+
+require __DIR__ . '/vendor/autoload.php';
+
 $file_name = "configurate.csv";
 
 if (($handle = fopen($file_name, "a+")) !== FALSE) {
     while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
-        $arResult['DATA'][] = $data;
+        $arResult['DATA'][] = ['ip' => $data[0], 'proxy' => $data[1], 'port' => $data[2], 'duration' => $data[3]]; 
     }
 
-    if (!empty($_REQUEST['ip'])){
+    if (!empty($_REQUEST['proxy'])) {
 
         /*foreach ($arResult['DATA'] as $key => $arItem){
             if ($arItem[0] == $_REQUEST['ip']){
@@ -18,32 +21,16 @@ if (($handle = fopen($file_name, "a+")) !== FALSE) {
             $handle1 = fopen($file_name, "w");
             fputcsv($handle1, explode(",", $arResult['DATA']));
         }*/
-
-        $write =
-            $_REQUEST['ip'].','.$_REQUEST['proxy'].','.$_REQUEST['port'].','.(time()+ $_REQUEST['time']);
-        $write = explode(",", $write);
+        
+        $write = [$_SERVER['REMOTE_ADDR'], $_REQUEST['proxy'], $_REQUEST['port'], time() + $_REQUEST['time']];
         fputcsv($handle, $write);
         header("Location: index.php");
         exit();
     }
     fclose($handle);
-}?>
-    <form action="">
-        <input type="hidden" name="ip" value="<?=$_SERVER['REMOTE_ADDR']?>">
-        <input type="text" name="proxy" placeholder="Proxy">
-        <input type="number" name="port" placeholder="Port">
-        <input type="number" name="time" placeholder="Время (сек.)">
-        <input type="submit">
-    </form>
-    <table border="1">
-        <?foreach ($arResult['DATA'] as $arData){?>
-        <tr>
-            <td><?=$arData[0]?></td>
-            <td><?=$arData[1]?></td>
-            <td><?=$arData[2]?></td>
-            <td><?=$arData[3]?></td>
-        </tr>
-        <?}?>
-    </table>
 
-<a href="/pac.php">Скачать файл</a>
+    $m = new Mustache_Engine([
+        'loader' => new Mustache_Loader_FilesystemLoader(__DIR__ . '/templates'),
+    ]);
+    echo $m->render('list', $arResult);
+}

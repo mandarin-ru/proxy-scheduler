@@ -1,0 +1,9 @@
+{
+    "name": "mandarin-ru/proxy-pacman",
+    "description": "Remote-controlled proxy autoconfiguration",
+    "type": "project",
+    "require": {
+        "mustache/mustache": "^2.13"
+    },
+    "license": "MIT"
+}
