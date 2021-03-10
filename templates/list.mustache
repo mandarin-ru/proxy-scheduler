@@ -8,6 +8,13 @@
   <div class="container-md my-3">
     <form action="">
       <div class="row mb-3">
+        <label for="pattern" class="col-sm-2 col-form-label">URL Pattern</label>
+        <div class="col-sm-10">
+          <input type="text" name="pattern" id="pattern" placeholder="*.example.com" value="*" class="form-control">
+        </div>
+      </div>
+
+      <div class="row mb-3">
         <label for="proxy" class="col-sm-2 col-form-label">Proxy host</label>
         <div class="col-sm-10">
           <input type="text" name="proxy" id="proxy" placeholder="socks.example.com or 192.168.1.1" class="form-control">
@@ -38,6 +45,7 @@
       <thead>
         <tr>
           <th scope="col">Client</th>
+          <th scope="col">URL Pattern</th>
           <th scope="col">Proxy host</th>
           <th scope="col">Port</th>
           <th scope="col">Time till</th>
@@ -47,6 +55,7 @@
         {{# DATA }}
             <tr>
                 <td>{{ ip }}</td>
+                <td>{{ pattern }}</td>
                 <td>{{ proxy }}</td>
                 <td>{{ port }}</td>
                 <td>{{ duration }}</td>
