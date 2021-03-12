@@ -1,5 +1,5 @@
 {
-    "name": "mandarin-ru/proxy-pacman",
+    "name": "mandarin-ru/proxy-scheduler",
     "description": "Remote-controlled proxy autoconfiguration",
     "type": "project",
     "require": {
