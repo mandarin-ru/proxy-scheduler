@@ -1,11 +1,11 @@
 <?php
 
-const RULES_FILE_NAME = "configurate.csv";
+const RULES_FILE_NAME = "data/configurate.csv";
 
 class Storage {
 
     function readRules(?string $clientFilter = NULL): array {
-        if (($handle = fopen(RULES_FILE_NAME, "r")) === FALSE) {
+        if (($handle = @fopen(RULES_FILE_NAME, "r")) === FALSE) {
             return [];
         }
         $result = [];

@@ -9,15 +9,7 @@ First you need to clone the repo and open it in the terminal. There is no prefer
 ### Docker
 
 ```
-chmod a+w configurate.csv
 docker-compose up -d
-```
-
-or 
-
-```
-chmod a+w configurate.csv
-docker run -d -v "./:/var/www/html" -p "8905:80" php:8-apache
 ```
 
 ### Development
@@ -25,5 +17,6 @@ docker run -d -v "./:/var/www/html" -p "8905:80" php:8-apache
 For the small deployments and development purposes built-in PHP server should be enough:
 
 ```
+composer install
 php -S 0.0.0.0:8905
 ```

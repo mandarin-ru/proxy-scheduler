@@ -3,7 +3,5 @@ services:
   webserver:
     build: .
     container_name: proxy-scheduler
-    volumes:
-        - ./configurate.csv:/var/www/html/configurate.csv
     ports:
      - "8905:80"
