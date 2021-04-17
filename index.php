@@ -18,7 +18,7 @@ if (!empty($_REQUEST['proxy'])) {
     }*/
     
     $client = $_REQUEST['client'];// return `$_SERVER['REMOTE_ADDR'];` once remote control done
-    $storage->addRule($client, $_REQUEST['proxy'], $_REQUEST['port'], time() + $_REQUEST['time'], $_REQUEST['pattern']);
+    $storage->addRule($client, $_REQUEST['proxy'], $_REQUEST['port'], $_REQUEST['time'], $_REQUEST['pattern']);
     header("Location: index.php");
     exit();
 }
