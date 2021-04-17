@@ -8,6 +8,13 @@
   <div class="container-md my-3">
     <form action="">
       <div class="row mb-3">
+        <label for="client" class="col-sm-2 col-form-label">Client address</label>
+        <div class="col-sm-10">
+          <input type="text" name="client" id="client" placeholder="192.168.32.2" value="{{ myIP }}" class="form-control">
+        </div>
+      </div>
+
+       <div class="row mb-3">
         <label for="pattern" class="col-sm-2 col-form-label">URL Pattern</label>
         <div class="col-sm-10">
           <input type="text" name="pattern" id="pattern" placeholder="*.example.com" value="*" class="form-control">
