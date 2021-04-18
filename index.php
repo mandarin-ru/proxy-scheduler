@@ -6,19 +6,9 @@ require 'Storage.php';
 $storage = new Storage;
 
 if (!empty($_REQUEST['proxy'])) {
-    /*foreach ($arResult['DATA'] as $key => $arItem){
-        if ($arItem[0] == $_REQUEST['ip']){
-            unset ($arItem[$key]);
-            $flag = true;
-        }
-    }
-    if ($flag){
-        $handle1 = fopen($file_name, "w");
-        fputcsv($handle1, explode(",", $arResult['DATA']));
-    }*/
-    
-    $client = $_REQUEST['client'];// return `$_SERVER['REMOTE_ADDR'];` once remote control done
-    $storage->addRule($client, $_REQUEST['proxy'], $_REQUEST['port'], $_REQUEST['time'], $_REQUEST['pattern']);
+    $client = $_REQUEST['client']; // return `$_SERVER['REMOTE_ADDR'];` once remote control done
+    $since = $_REQUEST['action'] == "stop" ? 0 : time();
+    $storage->addRule($client, $_REQUEST['proxy'], $_REQUEST['port'], $_REQUEST['time'], $_REQUEST['pattern'], $since);
     header("Location: index.php");
     exit();
 }

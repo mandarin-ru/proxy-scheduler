@@ -26,13 +26,21 @@ class Storage {
         return $result;
     }
 
-    function addRule(string $ip, string $proxy, string $port, string $duration, string $pattern) {
-        if (($handle = fopen(RULES_FILE_NAME, "a")) === FALSE) {
+    function addRule(string $ip, string $proxy, string $port, int $duration, string $pattern, $since = NULL) {
+        $existing = $this->readRules();
+        if (($handle = fopen(RULES_FILE_NAME, "w")) === FALSE) {
             return;
         }
-        $timeEnd = time() + $duration;
+        $since = $since ?? time();
+        $timeEnd = $since + $duration;
         $write = [$ip, $proxy, $port, $timeEnd, $pattern, $duration];
         fputcsv($handle, $write);
+        foreach ($existing as $rule) {
+            if ($ip == $rule['ip'] && $proxy == $rule['proxy'] && $port == $rule['port'] && $pattern == $rule['pattern']) {
+                continue;
+            }
+            fputcsv($handle, [$rule['ip'], $rule['proxy'], $rule['port'], $rule['timeEnd'], $rule['pattern'], $rule['duration']]);
+        }
         fclose($handle);
     }
 
