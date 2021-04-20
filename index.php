@@ -7,7 +7,7 @@ $storage = new Storage;
 
 if (!empty($_REQUEST['proxy'])) {
     $client = $_REQUEST['client']; // return `$_SERVER['REMOTE_ADDR'];` once remote control done
-    $since = $_REQUEST['action'] == "stop" ? 0 : time();
+    $since = ($_REQUEST['action'] ?? null) == "stop" ? 0 : time();
     $storage->addRule($client, $_REQUEST['proxy'], $_REQUEST['port'], $_REQUEST['time'], $_REQUEST['pattern'], $since);
     header("Location: index.php");
     exit();
