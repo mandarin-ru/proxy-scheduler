@@ -4,6 +4,7 @@ require __DIR__ . '/vendor/autoload.php';
 require 'Storage.php';
 
 header("Content-type: application/x-ns-proxy-autoconfig");
+header("Cache-Control: max-age=300");
 $storage = new Storage;
 
 $m = new Mustache_Engine([
