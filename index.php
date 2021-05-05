@@ -16,5 +16,16 @@ if (!empty($_REQUEST['proxy'])) {
 
 $m = new Mustache_Engine([
     'loader' => new Mustache_Loader_FilesystemLoader(__DIR__ . '/templates'),
+    'helpers' => [
+        'formatTimestamp' => function($text, Mustache_LambdaHelper $helper) {
+            $timestamp = intval($helper->render($text)); 
+            $diff = $timestamp - time();
+            if ($diff <= 0) {
+                return "Due";
+            }
+            $diff = intval($diff / 60);
+            return "$diff minutes";
+        },
+    ]
 ]);
 echo $m->render('list', ['DATA' => $storage->readRules(), 'myIP' => $_SERVER['REMOTE_ADDR']]);

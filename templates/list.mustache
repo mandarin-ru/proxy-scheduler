@@ -55,7 +55,7 @@
           <th scope="col">URL Pattern</th>
           <th scope="col">Proxy host</th>
           <th scope="col">Port</th>
-          <th scope="col">Time till</th>
+          <th scope="col">Time left</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -67,7 +67,7 @@
                 <td>{{ pattern }}<input type="hidden" name="pattern" value="{{ pattern }}" /></td>
                 <td>{{ proxy }}<input type="hidden" name="proxy" value="{{ proxy }}" /></td>
                 <td>{{ port }}<input type="hidden" name="port" value="{{ port }}" /></td>
-                <td>{{ timeEnd }} ({{ duration }} seconds)<input type="hidden" name="time" value="{{ duration }}" /></td>
+                <td><b>{{# formatTimestamp }}{{ timeEnd }}{{/ formatTimestamp }}</b> ({{ duration }} seconds)<input type="hidden" name="time" value="{{ duration }}" /></td>
                 <td>
                   <button type="submit" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Stop" name="action" value="stop" >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause" viewBox="0 0 16 16">
