@@ -33,7 +33,7 @@ class Storage {
     }
 
     function addRule(string $ip, string $proxy, string $port, int $duration, string $pattern, $since = NULL) {
-        $existing = $this->readRules();
+        $existing = $this->readRules(RULES_ALL);
         if (($handle = fopen(RULES_FILE_NAME, "w")) === FALSE) {
             return;
         }
