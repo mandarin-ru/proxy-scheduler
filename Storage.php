@@ -1,10 +1,12 @@
 <?php
 
 const RULES_FILE_NAME = "data/configurate.csv";
+const RULES_ONLY_ACTIVE = true;
+const RULES_ALL = false;
 
 class Storage {
 
-    function readRules(?string $clientFilter = NULL): array {
+    function readRules(bool $onlyActive, ?string $clientFilter = NULL): array {
         if (($handle = @fopen(RULES_FILE_NAME, "r")) === FALSE) {
             return [];
         }
@@ -18,9 +20,13 @@ class Storage {
                 'pattern' => $data[4],
                 'duration' => $data[5],
             ];
-            if ($clientFilter === NULL || $clientFilter == $row['ip']) {
-                $result[] = $row;
+            if ($clientFilter !== NULL && $clientFilter != $row['ip']) {
+                continue;
             }
+            if ($onlyActive && $row['timeEnd'] < time()) {
+                continue;
+            }
+            $result[] = $row;
         }
         fclose($handle);
         return $result;

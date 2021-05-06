@@ -28,4 +28,4 @@ $m = new Mustache_Engine([
         },
     ]
 ]);
-echo $m->render('list', ['DATA' => $storage->readRules(), 'myIP' => $_SERVER['REMOTE_ADDR']]);
+echo $m->render('list', ['DATA' => $storage->readRules(RULES_ALL), 'myIP' => $_SERVER['REMOTE_ADDR']]);

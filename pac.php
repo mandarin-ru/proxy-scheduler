@@ -10,4 +10,4 @@ $storage = new Storage;
 $m = new Mustache_Engine([
     'loader' => new Mustache_Loader_FilesystemLoader(__DIR__ . '/templates'),
 ]);
-echo $m->render('pacfile', ['proxy' => $storage->readRules($_SERVER['REMOTE_ADDR'])]);
+echo $m->render('pacfile', ['proxy' => $storage->readRules(RULES_ONLY_ACTIVE, $_SERVER['REMOTE_ADDR'])]);
