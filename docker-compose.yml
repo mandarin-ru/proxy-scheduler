@@ -5,3 +5,16 @@ services:
     container_name: proxy-scheduler
     ports:
      - "8905:80"
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.proxy-pacman.rule=Host(`pac.localhost`)"
+      - "traefik.http.routers.proxy-pacman.entrypoints=web"
+      - "traefik.http.services.proxy-pacman.loadbalancer.server.port=80"
+      - "traefik.http.middlewares.proxy-pacman-headers.headers.customrequestheaders.X-Forwarded-For="
+      - "traefik.http.routers.proxy-pacman.middlewares=proxy-pacman-headers"
+
+networks:
+  traefik:
+    external: true

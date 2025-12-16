@@ -6,6 +6,10 @@ const RULES_ALL = false;
 
 class Storage {
 
+    private function validateIP(string $ip): bool {
+        return filter_var($ip, FILTER_VALIDATE_IP) !== false;
+    }
+
     function readRules(bool $onlyActive, ?string $clientFilter = NULL): array {
         if (($handle = @fopen(RULES_FILE_NAME, "r")) === FALSE) {
             return [];
@@ -33,6 +37,10 @@ class Storage {
     }
 
     function addRule(string $ip, string $proxy, string $port, int $duration, string $pattern, $since = NULL) {
+        if (!$this->validateIP($ip)) {
+            error_log("Invalid IP address provided to addRule: $ip");
+            return;
+        }
         $existing = $this->readRules(RULES_ALL);
         if (($handle = fopen(RULES_FILE_NAME, "w")) === FALSE) {
             return;
