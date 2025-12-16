@@ -2,6 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 require 'Storage.php';
+require 'IpHelper.php';
 
 $storage = new Storage;
 
@@ -28,4 +29,4 @@ $m = new Mustache_Engine([
         },
     ]
 ]);
-echo $m->render('list', ['DATA' => $storage->readRules(RULES_ALL), 'myIP' => $_SERVER['REMOTE_ADDR']]);
+echo $m->render('list', ['DATA' => $storage->readRules(RULES_ALL), 'myIP' => getUserIp()]);
