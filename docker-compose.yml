@@ -7,6 +7,8 @@ services:
      - "8905:80"
     networks:
       - traefik
+    volumes:
+      - ${PHP_CONFIG:-./php-prod.ini}:/usr/local/etc/php/conf.d/99-app.ini
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.proxy-pacman.rule=Host(`pac.localhost`)"
