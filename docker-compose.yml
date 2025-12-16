@@ -11,7 +11,7 @@ services:
       - ${PHP_CONFIG:-./php-prod.ini}:/usr/local/etc/php/conf.d/99-app.ini
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.proxy-pacman.rule=Host(`pac.localhost`)"
+      - "traefik.http.routers.proxy-pacman.rule=Host(`proxy.local`)"
       - "traefik.http.routers.proxy-pacman.entrypoints=web"
       - "traefik.http.services.proxy-pacman.loadbalancer.server.port=80"
       - "traefik.http.middlewares.proxy-pacman-headers.headers.customrequestheaders.X-Forwarded-For="
